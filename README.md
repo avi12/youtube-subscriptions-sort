@@ -9,7 +9,7 @@ For example, suppose you want to watch a 5-minute video, 15-minute video and 10-
 ![Screenshot](https://user-images.githubusercontent.com/6422804/191924845-3ca34767-c70c-4c08-8b71-a8b7b1da9c1b.png)
 
 ## How to use?
-Press <kbd>Ctrl</kbd><kbd>Windows</kbd><kbd>Alt</kbd> / <kbd>Ctrl</kbd><kbd>Cmd</kbd><kbd>Option</kbd> to open the videos in new tabs
+Hold <kbd>Ctrl</kbd><kbd>Windows</kbd><kbd>Alt</kbd> / <kbd>Ctrl</kbd><kbd>Cmd</kbd><kbd>Option</kbd> and click on any video you'd like to watch
 
 If you want to launch in a new window, toggle on the <kbd>Caps Lock</kbd> key
 

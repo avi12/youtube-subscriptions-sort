@@ -4,25 +4,19 @@ specifiers:
   '@plasmohq/prettier-plugin-sort-imports': 1.2.2
   '@types/chrome': 0.0.196
   '@types/node': 18.7.15
-  '@types/react': 18.0.18
-  '@types/react-dom': 18.0.6
-  plasmo: 0.54.4
+  plasmo: 0.55.0-alpha.0
   prettier: 2.7.1
-  react: 18.2.0
-  react-dom: 18.2.0
+  time-to-seconds: ^1.4.1
   typescript: 4.8.2
 
 dependencies:
-  plasmo: 0.54.4_biqbaboplfbrettd7655fr4n2y
-  react: 18.2.0
-  react-dom: 18.2.0_react@18.2.0
+  plasmo: 0.55.0-alpha.0
+  time-to-seconds: 1.4.1
 
 devDependencies:
   '@plasmohq/prettier-plugin-sort-imports': 1.2.2_prettier@2.7.1
   '@types/chrome': 0.0.196
   '@types/node': 18.7.15
-  '@types/react': 18.0.18
-  '@types/react-dom': 18.0.6
   prettier: 2.7.1
   typescript: 4.8.2
 
@@ -1119,7 +1113,7 @@ packages:
       nullthrows: 1.1.1
     dev: false
 
-  /@plasmohq/consolidate/0.17.0_biqbaboplfbrettd7655fr4n2y:
+  /@plasmohq/consolidate/0.17.0:
     resolution: {integrity: sha512-Na8imBnvzYPtzkK+9Uv9hPZ/oJti/0jgiQWD222SHxHw2QCVuR4KzslxXCy/rS8gGluSiTs1BGVvc3d2O6aJCA==}
     engines: {node: '>= 0.10.0'}
     peerDependencies:
@@ -1264,8 +1258,6 @@ packages:
         optional: true
     dependencies:
       bluebird: 3.7.2
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@plasmohq/init/0.2.1:
@@ -1284,7 +1276,7 @@ packages:
       nullthrows: 1.1.1
     dev: false
 
-  /@plasmohq/parcel-config/0.9.1_biqbaboplfbrettd7655fr4n2y:
+  /@plasmohq/parcel-config/0.9.1:
     resolution: {integrity: sha512-GbBCb2wave1h9NSny4iu1joh+P1zMG7HxM4HuNLWOeHME4dAxxaP4CcaYHJ+YQDwpSEl7Fhk/YHRjyigg8quzw==}
     dependencies:
       '@parcel/config-default': 2.7.0_@parcel+core@2.7.0
@@ -1310,7 +1302,7 @@ packages:
       '@plasmohq/parcel-transformer-inline-css': 0.1.1
       '@plasmohq/parcel-transformer-manifest': 0.4.1
       '@plasmohq/parcel-transformer-svelte3': 0.2.1
-      '@plasmohq/parcel-transformer-vue3': 0.2.1_biqbaboplfbrettd7655fr4n2y
+      '@plasmohq/parcel-transformer-vue3': 0.2.1
     transitivePeerDependencies:
       - arc-templates
       - atpl
@@ -1453,7 +1445,7 @@ packages:
       '@parcel/utils': 2.7.0
     dev: false
 
-  /@plasmohq/parcel-transformer-vue3/0.2.1_biqbaboplfbrettd7655fr4n2y:
+  /@plasmohq/parcel-transformer-vue3/0.2.1:
     resolution: {integrity: sha512-w7B5rEMqUHzeNzyDi9mNMjdwpcUza+96p7ZBQt9TGPnDGcNi5OKgeIfRo6ecTY/F1VzWk/WBMh1UudqL6i6VYw==}
     engines: {parcel: '>= 2.7.0'}
     dependencies:
@@ -1463,7 +1455,7 @@ packages:
       '@parcel/source-map': 2.1.1
       '@parcel/types': 2.7.0_@parcel+core@2.7.0
       '@parcel/utils': 2.7.0
-      '@plasmohq/consolidate': 0.17.0_biqbaboplfbrettd7655fr4n2y
+      '@plasmohq/consolidate': 0.17.0
       '@vue/compiler-sfc': 3.2.39
       nullthrows: 1.1.1
       semver: 7.3.7
@@ -1623,33 +1615,11 @@ packages:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
     dev: false
 
-  /@types/prop-types/15.7.5:
-    resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
-    dev: true
-
-  /@types/react-dom/18.0.6:
-    resolution: {integrity: sha512-/5OFZgfIPSwy+YuIBP/FgJnQnsxhZhjjrnxudMddeblOouIodEQ75X14Rr4wGSG/bknL+Omy9iWlLo1u/9GzAA==}
-    dependencies:
-      '@types/react': 18.0.18
-    dev: true
-
-  /@types/react/18.0.18:
-    resolution: {integrity: sha512-6hI08umYs6NaiHFEEGioXnxJ+oEhY3eRz8VCUaudZmGdtvPviCJB8mgaMxaDWAdPSYd4eFavrPk2QIolwbLYrg==}
-    dependencies:
-      '@types/prop-types': 15.7.5
-      '@types/scheduler': 0.16.2
-      csstype: 3.1.1
-    dev: true
-
   /@types/responselike/1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
       '@types/node': 18.7.15
     dev: false
-
-  /@types/scheduler/0.16.2:
-    resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
-    dev: true
 
   /@vue/compiler-core/3.2.39:
     resolution: {integrity: sha512-mf/36OWXqWn0wsC40nwRRGheR/qoID+lZXbIuLnr4/AngM0ov8Xvv8GHunC0rKRIkh60bTqydlqTeBo49rlbqw==}
@@ -2183,10 +2153,6 @@ packages:
       css-tree: 1.1.3
     dev: false
 
-  /csstype/3.1.1:
-    resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
-    dev: true
-
   /debug/3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
     peerDependencies:
@@ -2373,6 +2339,10 @@ packages:
       chardet: 0.7.0
       iconv-lite: 0.4.24
       tmp: 0.0.33
+    dev: false
+
+  /fflate/0.7.3:
+    resolution: {integrity: sha512-0Zz1jOzJWERhyhsimS54VTqOteCNwRtIlh8isdL0AXLo0g7xNTfTL7oWrkmCnPhZGocKIkWHBistBrrpoNH3aw==}
     dev: false
 
   /figures/5.0.0:
@@ -2945,13 +2915,6 @@ packages:
       is-unicode-supported: 1.3.0
     dev: false
 
-  /loose-envify/1.4.0:
-    resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
-    hasBin: true
-    dependencies:
-      js-tokens: 4.0.0
-    dev: false
-
   /lower-case/2.0.2:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
     dependencies:
@@ -3296,8 +3259,8 @@ packages:
     dev: false
     optional: true
 
-  /plasmo/0.54.4_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-WIs1Vzjg6HwGQu86BWpdW3c2lM3V+Q9+oVF5of2mOmfSytRIMWqaq3I95on3chz9m7a1yekcANOX7jjCldWPGw==}
+  /plasmo/0.55.0-alpha.0:
+    resolution: {integrity: sha512-i7gjwz9tc/ivNPHY5YxQoPW/K+8piJKSgVwape8DJLyIT3Fpz03EvkpTitzafJXWZsQXApPk2GSGbqAJGDOcSQ==}
     hasBin: true
     dependencies:
       '@expo/spawn-async': 1.7.0
@@ -3306,7 +3269,7 @@ packages:
       '@parcel/package-manager': 2.7.0_@parcel+core@2.7.0
       '@parcel/watcher': 2.0.5
       '@plasmohq/init': 0.2.1
-      '@plasmohq/parcel-config': 0.9.1_biqbaboplfbrettd7655fr4n2y
+      '@plasmohq/parcel-config': 0.9.1
       archiver: 5.3.1
       buffer: 6.0.3
       chalk: 5.0.1
@@ -3314,6 +3277,7 @@ packages:
       dotenv: 16.0.2
       dotenv-expand: 9.0.0
       events: 3.3.0
+      fflate: 0.7.3
       get-port: 6.1.2
       got: 12.4.1
       inquirer: 9.1.1
@@ -3491,16 +3455,6 @@ packages:
       strip-json-comments: 2.0.1
     dev: false
 
-  /react-dom/18.2.0_react@18.2.0:
-    resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
-    peerDependencies:
-      react: ^18.2.0
-    dependencies:
-      loose-envify: 1.4.0
-      react: 18.2.0
-      scheduler: 0.23.0
-    dev: false
-
   /react-error-overlay/6.0.9:
     resolution: {integrity: sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==}
     dev: false
@@ -3508,13 +3462,6 @@ packages:
   /react-refresh/0.9.0:
     resolution: {integrity: sha512-Gvzk7OZpiqKSkxsQvO/mbTN1poglhmAV7gR/DdIrRrSMXraRQQlfikRJOr3Nb9GTMPC5kof948Zy6jJZIFtDvQ==}
     engines: {node: '>=0.10.0'}
-    dev: false
-
-  /react/18.2.0:
-    resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
-    engines: {node: '>=0.10.0'}
-    dependencies:
-      loose-envify: 1.4.0
     dev: false
 
   /readable-stream/2.3.7:
@@ -3635,12 +3582,6 @@ packages:
     resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
     dev: false
     optional: true
-
-  /scheduler/0.23.0:
-    resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
-    dependencies:
-      loose-envify: 1.4.0
-    dev: false
 
   /semver/5.7.1:
     resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}
@@ -3858,6 +3799,11 @@ packages:
 
   /through/2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
+    dev: false
+
+  /time-to-seconds/1.4.1:
+    resolution: {integrity: sha512-0acOZ3geKjY85JSQfAAVPZ1ykTgJCBr+4LJC75liVWKBSLw3Htz+TW8mbUAHlb3HWjlE1iVxbDBn3tAHUwjmlg==}
+    engines: {node: '>=15.0.1', vscode: ^1.22.0}
     dev: false
 
   /timsort/0.3.0:

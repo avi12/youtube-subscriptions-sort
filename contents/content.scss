@@ -1,0 +1,8 @@
+.video-selected {
+  color: red !important;
+}
+
+html[dark="true"] .video-selected,
+html[data-darkreader-scheme="dark"] .video-selected {
+  color: cyan !important;
+}

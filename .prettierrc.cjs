@@ -5,7 +5,7 @@ module.exports = {
   printWidth: 120,
   tabWidth: 2,
   useTabs: false,
-  semi: false,
+  semi: true,
   singleQuote: false,
   trailingComma: "none",
   bracketSpacing: true,
@@ -13,5 +13,14 @@ module.exports = {
   plugins: [require.resolve("@plasmohq/prettier-plugin-sort-imports")],
   importOrder: ["^@plasmohq/(.*)$", "^~(.*)$", "^[./]"],
   importOrderSeparation: true,
-  importOrderSortSpecifiers: true
+  importOrderSortSpecifiers: true,
+  arrowParens: "avoid",
+  overrides: [
+    {
+      files: "*.ts",
+      options: {
+        importOrderParserPlugins: ["typescript"]
+      }
+    }
+  ]
 }

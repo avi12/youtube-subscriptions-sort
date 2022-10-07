@@ -1,5 +1,5 @@
-import timeToSeconds from "time-to-seconds";
 import type { PlasmoContentScript } from "plasmo";
+import timeToSeconds from "time-to-seconds";
 
 let elVideoParents = [];
 const keysPressedInit = {
@@ -58,8 +58,8 @@ function onKeyUp(e: KeyboardEvent) {
 
   const keysToBePressedNewWindow = Object.keys(keysPressedNewWindowInit);
   keysToBePressedNewWindow.forEach(key => {
-    keysPressedNewWindow[key] = keysPressedNewWindow[key] ||
-      (key === "CapsLock" ? e.getModifierState("CapsLock") : e.code === key);
+    keysPressedNewWindow[key] =
+      keysPressedNewWindow[key] || (key === "CapsLock" ? e.getModifierState("CapsLock") : e.code === key);
   });
 
   if (!(Object.values(keysPressedNewWindow).every(Boolean) || Object.values(keysPressed).every(Boolean))) {
@@ -70,10 +70,10 @@ function onKeyUp(e: KeyboardEvent) {
     .sort((elA, elB) => {
       const a = elA.querySelector(Selectors.videoTime).textContent;
       const b = elB.querySelector(Selectors.videoTime).textContent;
-      if (a.includes("SHORTS")) {
+      if (a.includes("SHORTS") || b.includes("SHORTS")) {
         return -1;
       }
-      if (b.includes("LIVE")) {
+      if (a.includes("LIVE") || b.includes("LIVE")) {
         return 1;
       }
       return timeToSeconds(a) - timeToSeconds(b);

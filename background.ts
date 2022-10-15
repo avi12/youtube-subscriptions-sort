@@ -1,3 +1,7 @@
+import Tab = chrome.tabs.Tab;
+import OnClickData = chrome.contextMenus.OnClickData;
+import Window = chrome.windows.Window;
+
 async function urlToLength(url: string): Promise<{ url: string; videoLength: number }> {
   const response = await fetch(url);
   const text = await response.text();
@@ -29,20 +33,15 @@ async function getSortLengths({
   return urls;
 }
 
-chrome.runtime.onMessage.addListener(async ({ isNewWindow, openLinks }, sender) => {
-  if (!isNewWindow) {
-    const { id: windowId } = await chrome.windows.getCurrent();
-    const promiseTabs: Promise<chrome.tabs.Tab>[] = openLinks.map((url, i) =>
-      chrome.tabs.create({ url, windowId, active: i === 0, index: i + 1 + sender.tab.index })
-    );
-    await Promise.all(promiseTabs);
-    return;
-  }
-
+async function getWindowYouTubeOnly(): Promise<Window> {
   const windows = await chrome.windows.getAll({ populate: true, windowTypes: ["normal"] });
-  const windowYouTubeOnly = windows.find(({ tabs }) =>
+  return windows.find(({ tabs }) =>
     tabs.every(({ url }) => url.match(/^https:\/\/www\.youtube\.com\/(?:watch|shorts)/))
   );
+}
+
+async function openInNewOrExistingWindow(openLinks: string[]): Promise<void> {
+  const windowYouTubeOnly = await getWindowYouTubeOnly();
   if (windowYouTubeOnly) {
     const sortLengths = await getSortLengths({ tabsYouTube: windowYouTubeOnly.tabs, openLinks });
     const promiseTabs: Promise<chrome.tabs.Tab>[] = sortLengths.map(({ url, index }) =>
@@ -64,6 +63,30 @@ chrome.runtime.onMessage.addListener(async ({ isNewWindow, openLinks }, sender) 
     promiseTabs.push(chrome.tabs.create({ url: openLinks[i], windowId, active: false }));
   }
   await Promise.all(promiseTabs);
+}
+
+chrome.runtime.onMessage.addListener(async ({ isNewWindow, openLinks }, sender) => {
+  if (!isNewWindow) {
+    const { id: windowId } = await chrome.windows.getCurrent();
+    const promiseTabs: Promise<chrome.tabs.Tab>[] = openLinks.map((url, i) =>
+      chrome.tabs.create({ url, windowId, active: i === 0, index: i + 1 + sender.tab.index })
+    );
+    await Promise.all(promiseTabs);
+    return;
+  }
+
+  await openInNewOrExistingWindow(openLinks);
 });
 
+chrome.contextMenus.create({
+  id: "open-in-new-or-existing-window",
+  title: "Open in a dedicated YouTube window",
+  contexts: ["page"],
+  documentUrlPatterns: ["https://www.youtube.com/watch*", "https://www.youtube.com/shorts/*"]
+});
+
+chrome.contextMenus.onClicked.addListener(async ({ pageUrl }: OnClickData, tab: Tab) => {
+  await chrome.tabs.remove(tab.id);
+  await openInNewOrExistingWindow([pageUrl]);
+});
 export {};

@@ -16,7 +16,7 @@ async function getSortLengths({
   openLinks
 }: {
   openLinks: string[];
-  tabsYouTube: chrome.tabs.Tab[];
+  tabsYouTube: Tab[];
 }): Promise<Awaited<{ url: string; index: number }>[]> {
   const promiseLengthsA = openLinks.map(urlToLength);
   const promiseLengthsB = tabsYouTube.map(({ url }) => urlToLength(url));
@@ -40,11 +40,11 @@ async function getWindowYouTubeOnly(): Promise<Window> {
   );
 }
 
-async function openInNewOrExistingWindow(openLinks: string[]): Promise<void> {
-  const windowYouTubeOnly = await getWindowYouTubeOnly();
+async function openInNewOrExistingWindow(openLinks: string[], window?: Window): Promise<void> {
+  const windowYouTubeOnly = window || (await getWindowYouTubeOnly());
   if (windowYouTubeOnly) {
     const sortLengths = await getSortLengths({ tabsYouTube: windowYouTubeOnly.tabs, openLinks });
-    const promiseTabs: Promise<chrome.tabs.Tab>[] = sortLengths.map(({ url, index }) =>
+    const promiseTabs: Promise<Tab>[] = sortLengths.map(({ url, index }) =>
       chrome.tabs.create({
         url,
         index,
@@ -52,13 +52,12 @@ async function openInNewOrExistingWindow(openLinks: string[]): Promise<void> {
         active: index === 0
       })
     );
-    await Promise.all(promiseTabs);
-    await chrome.windows.update(windowYouTubeOnly.id, { focused: true });
+    await Promise.all([...promiseTabs, chrome.windows.update(windowYouTubeOnly.id, { focused: true })]);
     return;
   }
 
   const { id: windowId } = await chrome.windows.create({ url: openLinks[0], state: "maximized" });
-  const promiseTabs: Promise<chrome.tabs.Tab>[] = [];
+  const promiseTabs: Promise<Tab>[] = [];
   for (let i = 1; i < openLinks.length; i++) {
     promiseTabs.push(chrome.tabs.create({ url: openLinks[i], windowId, active: false }));
   }
@@ -66,16 +65,17 @@ async function openInNewOrExistingWindow(openLinks: string[]): Promise<void> {
 }
 
 chrome.runtime.onMessage.addListener(async ({ isNewWindow, openLinks }, sender) => {
-  if (!isNewWindow) {
-    const { id: windowId } = await chrome.windows.getCurrent();
-    const promiseTabs: Promise<chrome.tabs.Tab>[] = openLinks.map((url, i) =>
-      chrome.tabs.create({ url, windowId, active: i === 0, index: i + 1 + sender.tab.index })
-    );
-    await Promise.all(promiseTabs);
+  if (isNewWindow) {
+    await openInNewOrExistingWindow(openLinks);
     return;
   }
 
-  await openInNewOrExistingWindow(openLinks);
+  const { id: windowId } = await chrome.windows.getCurrent();
+  const promiseTabs: Promise<Tab>[] = openLinks.map((url, i) =>
+    chrome.tabs.create({ url, windowId, active: i === 0, index: i + 1 + sender.tab.index })
+  );
+  await Promise.all(promiseTabs);
+  return;
 });
 
 chrome.contextMenus.create({
@@ -86,7 +86,12 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.onClicked.addListener(async ({ pageUrl }: OnClickData, tab: Tab) => {
-  await chrome.tabs.remove(tab.id);
-  await openInNewOrExistingWindow([pageUrl]);
+  const windowYouTubeOnly = await getWindowYouTubeOnly();
+  if (windowYouTubeOnly.id === tab.windowId) {
+    return;
+  }
+
+  await Promise.all([chrome.tabs.remove(tab.id), openInNewOrExistingWindow([pageUrl], windowYouTubeOnly)]);
 });
+
 export {};

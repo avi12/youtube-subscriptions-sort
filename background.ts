@@ -87,11 +87,9 @@ chrome.contextMenus.create({
 
 chrome.contextMenus.onClicked.addListener(async ({ pageUrl }: OnClickData, tab: Tab) => {
   const windowYouTubeOnly = await getWindowYouTubeOnly();
-  if (windowYouTubeOnly.id === tab.windowId) {
-    return;
+  if (windowYouTubeOnly.id !== tab.windowId) {
+    await Promise.all([chrome.tabs.remove(tab.id), openInNewOrExistingWindow([pageUrl], windowYouTubeOnly)]);
   }
-
-  await Promise.all([chrome.tabs.remove(tab.id), openInNewOrExistingWindow([pageUrl], windowYouTubeOnly)]);
 });
 
 export {};

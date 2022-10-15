@@ -9,7 +9,7 @@
     "set-version": "set-json-version -f package.json -v"
   },
   "dependencies": {
-    "plasmo": "0.55.3-alpha.0",
+    "plasmo": "0.56.0-alpha.0",
     "time-to-seconds": "^1.4.1"
   },
   "devDependencies": {
@@ -22,7 +22,8 @@
   },
   "manifest": {
     "permissions": [
-      "tabs"
+      "tabs",
+      "contextMenus"
     ],
     "host_permissions": [
       "https://www.youtube.com/*"

@@ -5,13 +5,13 @@ let elVideoParents = [];
 const keysPressedInit = {
   ControlLeft: false,
   MetaLeft: false,
-  AltLeft: false
+  ShiftLeft: false
 };
 let keysPressed = { ...keysPressedInit };
 const keysPressedNewWindowInit = {
   ControlLeft: false,
   MetaLeft: false,
-  AltLeft: false,
+  ShiftLeft: false,
   CapsLock: false
 };
 let keysPressedNewWindow = { ...keysPressedNewWindowInit };
@@ -25,7 +25,7 @@ enum Selectors {
 }
 
 function onVideoSelect(e: MouseEvent) {
-  if (!e.ctrlKey || !e.metaKey || !e.altKey) {
+  if (!e.ctrlKey || !e.metaKey || !e.shiftKey) {
     return;
   }
 

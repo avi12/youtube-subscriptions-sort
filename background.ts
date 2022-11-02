@@ -81,15 +81,17 @@ chrome.runtime.onMessage.addListener(async ({ isNewWindow, openLinks }, sender) 
 chrome.contextMenus.create({
   id: "open-in-new-or-existing-window",
   title: "Open in a dedicated YouTube window",
-  contexts: ["page"],
-  documentUrlPatterns: ["https://www.youtube.com/watch*", "https://www.youtube.com/shorts/*"]
+  contexts: ["link", "page"],
+  documentUrlPatterns: ["https://www.youtube.com/watch*", "https://www.youtube.com/shorts/*"],
+  targetUrlPatterns: ["https://www.youtube.com/watch*", "https://www.youtube.com/shorts/*"]
 });
 
-chrome.contextMenus.onClicked.addListener(async ({ pageUrl }: OnClickData, tab: Tab) => {
+chrome.contextMenus.onClicked.addListener(async ({ linkUrl, pageUrl }: OnClickData, tab: Tab) => {
   const windowYouTubeOnly = await getWindowYouTubeOnly();
-  if (windowYouTubeOnly.id !== tab.windowId) {
-    await Promise.all([chrome.tabs.remove(tab.id), openInNewOrExistingWindow([pageUrl], windowYouTubeOnly)]);
-  }
+  await Promise.all([
+    windowYouTubeOnly?.id !== tab.windowId && chrome.tabs.remove(tab.id),
+    openInNewOrExistingWindow([linkUrl || pageUrl], windowYouTubeOnly)
+  ]);
 });
 
 export {};

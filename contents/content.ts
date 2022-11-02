@@ -18,8 +18,8 @@ let keysPressedNewWindow = { ...keysPressedNewWindowInit };
 let isHeldKeys = false;
 
 enum Selectors {
-  videoParent = "ytd-grid-video-renderer, ytd-video-renderer, ytd-rich-item-renderer",
-  videoLink = "a#video-title[href*='/watch'], a#video-title[href*='/shorts'], a#video-title-link[href*='/watch'], a#video-title-link[href*='/shorts']",
+  videoParent = "ytd-grid-video-renderer, ytd-video-renderer, ytd-rich-item-renderer, ytd-compact-video-renderer",
+  videoLink = "a#video-title[href*='/watch'], a#video-title[href*='/shorts'], a#video-title-link[href*='/watch'], a#video-title-link[href*='/shorts'], a.ytd-compact-video-renderer[href*='/watch'], a.ytd-compact-video-renderer[href*='/shorts']",
   videoColor = "#video-title",
   videoTime = "ytd-thumbnail-overlay-time-status-renderer"
 }

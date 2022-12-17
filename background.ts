@@ -33,7 +33,7 @@ async function getSortLengths({
   return urls;
 }
 
-async function getWindowYouTubeOnly(): Promise<Window> {
+async function getWindowYouTubeOnly(): Promise<Window | null> {
   const windows = await chrome.windows.getAll({ populate: true, windowTypes: ["normal"] });
   return windows.find(({ tabs }) =>
     tabs.every(({ url }) => url.match(/^https:\/\/www\.youtube\.com\/(?:watch|shorts)/))
@@ -88,10 +88,28 @@ chrome.contextMenus.create({
 
 chrome.contextMenus.onClicked.addListener(async ({ linkUrl, pageUrl }: OnClickData, tab: Tab) => {
   const windowYouTubeOnly = await getWindowYouTubeOnly();
+  if (!windowYouTubeOnly) {
+    const windowNew = await chrome.windows.create();
+    await chrome.tabs.move(tab.id, {
+      windowId: windowNew.id,
+      index: 0
+    });
+    return;
+  }
+
+  const pUrl = linkUrl || pageUrl;
+  const sortLengths = await getSortLengths({
+    tabsYouTube: windowYouTubeOnly.tabs,
+    openLinks: [pUrl]
+  });
+  const { index } = sortLengths.find(({ url }) => pUrl === url);
+  const tabMoved = await chrome.tabs.move(tab.id, {
+    windowId: windowYouTubeOnly.id,
+    index
+  });
   await Promise.all([
-    windowYouTubeOnly?.id !== tab.windowId && chrome.tabs.remove(tab.id),
-    openInNewOrExistingWindow([linkUrl || pageUrl], windowYouTubeOnly)
+    chrome.windows.update(windowYouTubeOnly.id, { focused: true }),
+    chrome.tabs.update(tabMoved.id, { active: index === 0 })
   ]);
 });
-
 export {};

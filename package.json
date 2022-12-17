@@ -1,7 +1,7 @@
 {
   "name": "youtube-subscriptions-sort-plasmo",
   "displayName": "Sort YouTube subscriptions by watch time",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "avi12",
   "scripts": {
     "dev": "plasmo dev",
